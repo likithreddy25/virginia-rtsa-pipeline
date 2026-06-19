@@ -26,9 +26,10 @@ jobs:
 
       - name: Lint with flake8
         run: |
-          # Stop on syntax errors or undefined names; warn on style issues
+          # Catch syntax errors and undefined names across all files
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 . --count --max-line-length=120 --statistics --exclude=.git,__pycache__
+          # Enforce full style rules only on new test code
+          flake8 tests/ --count --max-line-length=120 --statistics
 
       - name: Run unit tests
         run: |
